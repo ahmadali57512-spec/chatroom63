@@ -1,0 +1,115 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Courier New', monospace;
+  background: #0a0a0f;
+  color: #00ff41;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Matrix-like background glow */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(ellipse at 20% 50%, rgba(0, 255, 65, 0.03) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 50%, rgba(0, 255, 65, 0.03) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Scanline animation */
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+.scanline {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: rgba(0, 255, 65, 0.08);
+  z-index: 9999;
+  animation: scanline 8s linear infinite;
+  pointer-events: none;
+}
+
+/* Glitch effect for titles */
+@keyframes glitch {
+  0% { text-shadow: 2px 0 #ff00c1, -2px 0 #00ffff; }
+  25% { text-shadow: -2px 0 #ff00c1, 2px 0 #00ffff; }
+  50% { text-shadow: 2px 2px #ff00c1, -2px -2px #00ffff; }
+  75% { text-shadow: -2px -2px #ff00c1, 2px 2px #00ffff; }
+  100% { text-shadow: 2px 0 #ff00c1, -2px 0 #00ffff; }
+}
+
+.glitch-text {
+  animation: glitch 0.5s infinite;
+}
+
+/* Decrypt pulse animation */
+@keyframes decryptPulse {
+  0% { color: #ff00c1; text-shadow: 0 0 15px #ff00c1; }
+  50% { color: #00ffff; text-shadow: 0 0 30px #00ffff; }
+  100% { color: #00ff41; text-shadow: 0 0 15px #00ff41; }
+}
+
+.decrypting {
+  animation: decryptPulse 0.4s ease 2;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0f;
+}
+::-webkit-scrollbar-thumb {
+  background: #00ff41;
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #00cc33;
+}
+/* Mobile-specific styles */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+  
+  input, button {
+    font-size: 16px !important; /* Prevents iOS zoom */
+  }
+  
+  .scanline {
+    display: none;
+  }
+}
+
+/* Prevent zoom on input focus for iOS */
+input, textarea, button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Smooth touch interactions */
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Scrollbar for mobile */
+::-webkit-scrollbar {
+  width: 3px;
+}
